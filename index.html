@@ -67,7 +67,7 @@
 
             <!-- Back Button -->
             <div class="back-button-container">
-                <button class="back-button" onclick="goBack()">← Back to Solutions</button>
+                <button class="back-button" onclick="goBack()">← Back</button>
             </div>
         </main>
     </div>
@@ -586,11 +586,7 @@
                     const backButton = document.getElementById('slider-back-button');
                     const selectedSolution = localStorage.getItem('selectedSolution');
                     if (backButton) {
-                        if (selectedSolution === 'Classic scanning') {
-                            backButton.textContent = '← Back to Form Selection';
-                        } else {
-                            backButton.textContent = '← Back to Solutions';
-                        }
+                        backButton.textContent = '← Back';
                     }
                 }, 10);
             }
@@ -626,7 +622,7 @@
                 const continueButtonContainer = document.createElement('div');
                 continueButtonContainer.className = 'slider-actions';
                 continueButtonContainer.innerHTML = `
-                    <button class="back-button" onclick="goBack()">← Back to Solutions</button>
+                    <button class="back-button" onclick="goBack()">← Back</button>
                     <button class="continue-button" onclick="proceedWithMultiSelection()" disabled>Continue</button>
                 `;
                 formOptionsContainer.parentNode.appendChild(continueButtonContainer);

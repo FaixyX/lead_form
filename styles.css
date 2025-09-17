@@ -5,6 +5,39 @@
     box-sizing: border-box;
 }
 
+/* Improve touch targets for mobile */
+@media (max-width: 768px) {
+    .solution-card {
+        -webkit-tap-highlight-color: rgba(72, 187, 120, 0.2);
+        tap-highlight-color: rgba(72, 187, 120, 0.2);
+    }
+    
+    .back-button, .continue-button {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Prevent horizontal scrolling on mobile */
+    body {
+        overflow-x: hidden;
+    }
+    
+    /* Better slider touch interaction */
+    .slider {
+        height: 12px; /* Larger touch area */
+    }
+    
+    .slider::-webkit-slider-thumb {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .slider::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+    }
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #ff6b6b, #ffa500, #ff6b6b);
@@ -366,38 +399,293 @@ body::before {
 
 
 /* Responsive Design */
-@media (max-width: 768px) {
+
+/* Tablet styles (768px to 1024px) */
+@media (max-width: 1024px) {
+    .main-content {
+        max-width: 90%;
+        padding: 30px 15px;
+    }
+    
     .solutions-grid {
-        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
         gap: 15px;
     }
     
-    .main-banner h1 {
-        font-size: 2rem;
+    .main-banner {
+        padding: 25px 30px;
+        margin-bottom: 30px;
     }
     
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .header-right {
-        flex-direction: column;
-        gap: 10px;
+    .slider-container {
+        max-width: 90%;
+        padding: 30px 15px;
     }
 }
 
-@media (max-width: 480px) {
+/* Mobile landscape and small tablet (768px and below) */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px 10px;
+    }
+    
     .solutions-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        max-width: 100%;
+    }
+    
+    .main-banner {
+        padding: 20px 25px;
+        margin-bottom: 25px;
     }
     
     .main-banner h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        line-height: 1.3;
     }
     
     .solution-card {
-        min-height: 150px;
+        min-height: 140px;
         padding: 20px 15px;
+        gap: 10px;
+    }
+    
+    .card-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .card-text {
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.2;
+    }
+    
+    /* Slider responsive */
+    .slider-container {
+        padding: 25px 10px;
+    }
+    
+    /* Zigzag layout for slider labels on tablet */
+    .slider-labels {
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height: 50px; /* Space for two rows */
+    }
+    
+    .slider-label {
+        position: absolute;
+        font-size: 12px;
+        min-width: 40px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    /* Alternating top/bottom positioning for zigzag effect */
+    .slider-label:nth-child(odd) {
+        top: 0; /* Top row */
+    }
+    
+    .slider-label:nth-child(even) {
+        bottom: 0; /* Bottom row */
+    }
+    
+    /* Position labels evenly across the width */
+    .slider-label:nth-child(1) { left: 0%; }
+    .slider-label:nth-child(2) { left: 11.11%; }
+    .slider-label:nth-child(3) { left: 22.22%; }
+    .slider-label:nth-child(4) { left: 33.33%; }
+    .slider-label:nth-child(5) { left: 44.44%; }
+    .slider-label:nth-child(6) { left: 55.55%; }
+    .slider-label:nth-child(7) { left: 66.66%; }
+    .slider-label:nth-child(8) { left: 77.77%; }
+    .slider-label:nth-child(9) { left: 88.88%; }
+    .slider-label:nth-child(10) { left: 100%; }
+    
+    .selected-value {
+        margin: 20px 0;
+        padding: 15px;
+    }
+    
+    .selected-value span {
+        font-size: 1.5rem;
+    }
+    
+    /* Button responsive */
+    .slider-actions {
+        margin: 30px 15px 15px 15px;
+        padding: 15px 20px;
+        flex-direction: row;
+        gap: 15px;
+    }
+    
+    .back-button, .continue-button {
+        padding: 12px 20px;
+        font-size: 14px;
+        min-width: 100px;
+        flex: 1;
+        max-width: 150px;
+    }
+    
+    /* Contact form responsive */
+    .contact-form-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .form-group input {
+        padding: 12px 15px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Mobile portrait (480px and below) */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px 8px;
+    }
+    
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .main-banner {
+        padding: 15px 20px;
+        margin-bottom: 20px;
+    }
+    
+    .main-banner h1 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+    
+    .solution-card {
+        min-height: 120px;
+        padding: 15px 12px;
+        gap: 8px;
+    }
+    
+    .card-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .card-text {
+        font-size: 0.9rem;
+    }
+    
+    /* Slider mobile adjustments */
+    .slider-container {
+        padding: 20px 8px;
+    }
+    
+    /* Zigzag layout for slider labels on mobile */
+    .slider-labels {
+        position: relative;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        height: 60px; /* Space for two rows */
+    }
+    
+    .slider-label {
+        position: absolute;
+        font-size: 10px;
+        min-width: 35px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    /* Alternating top/bottom positioning for zigzag effect */
+    .slider-label:nth-child(odd) {
+        top: 0; /* Top row */
+    }
+    
+    .slider-label:nth-child(even) {
+        bottom: 0; /* Bottom row */
+    }
+    
+    /* Position labels evenly across the width */
+    .slider-label:nth-child(1) { left: 0%; }
+    .slider-label:nth-child(2) { left: 11.11%; }
+    .slider-label:nth-child(3) { left: 22.22%; }
+    .slider-label:nth-child(4) { left: 33.33%; }
+    .slider-label:nth-child(5) { left: 44.44%; }
+    .slider-label:nth-child(6) { left: 55.55%; }
+    .slider-label:nth-child(7) { left: 66.66%; }
+    .slider-label:nth-child(8) { left: 77.77%; }
+    .slider-label:nth-child(9) { left: 88.88%; }
+    .slider-label:nth-child(10) { left: 100%; }
+    
+    .selected-value {
+        margin: 15px 0;
+        padding: 12px;
+    }
+    
+    .selected-value span {
+        font-size: 1.3rem;
+    }
+    
+    /* Button adjustments for small screens */
+    .slider-actions {
+        margin: 20px 10px 10px 10px;
+        padding: 12px 15px;
+        gap: 10px;
+    }
+    
+    .back-button, .continue-button {
+        padding: 10px 15px;
+        font-size: 13px;
+        min-width: 80px;
+    }
+    
+    /* Contact form mobile */
+    .contact-form-container {
+        padding: 10px;
+    }
+    
+    .contact-form {
+        gap: 15px;
+    }
+    
+    .form-group input {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+}
+
+/* Extra small screens (360px and below) */
+@media (max-width: 360px) {
+    .main-banner h1 {
+        font-size: 1.2rem;
+    }
+    
+    .solution-card {
+        min-height: 100px;
+        padding: 12px 10px;
+    }
+    
+    .card-text {
+        font-size: 0.85rem;
+    }
+    
+    /* More compact zigzag for extra small screens */
+    .slider-labels {
+        height: 50px; /* Reduce height for very small screens */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .slider-label {
+        font-size: 9px;
+        min-width: 30px;
+    }
+    
+    .back-button, .continue-button {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-width: 70px;
     }
 }
