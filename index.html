@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Management Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Page 1: Solution Selection -->
+    <div id="page1" class="page active">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>Find the right <span class="solution-text">Solution</span> for your problem</h1>
+            </div>
+
+            <!-- Solutions Grid -->
+            <div class="solutions-grid">
+                <!-- Row 1 -->
+                <div class="solution-card" onclick="selectSolution('Classic scanning')">
+                    <img src="svgs/scan.svg" alt="Scan" class="card-icon">
+                    <span class="card-text">Classic scanning</span>
+                </div>
+
+                <div class="solution-card" onclick="selectSolution('Document Classification')">
+                    <img src="svgs/documents.svg" alt="Documents" class="card-icon">
+                    <span class="card-text">Document Classification</span>
+                </div>
+
+                <div class="solution-card" onclick="selectSolution('Inbox')">
+                    <img src="svgs/inbox.svg" alt="Inbox" class="card-icon">
+                    <span class="card-text">Inbox</span>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="solution-card" onclick="selectSolution('Automation')">
+                    <img src="svgs/automation.svg" alt="Automation" class="card-icon">
+                    <span class="card-text">Automation</span>
+                </div>
+
+                <div class="solution-card" onclick="selectSolution('Document Management System')">
+                    <img src="svgs/dms.svg" alt="DMS" class="card-icon">
+                    <span class="card-text">Document Management System</span>
+                </div>
+
+                <div class="solution-card" onclick="selectSolution('Digital workflows')">
+                    <img src="svgs/workflows.svg" alt="Workflows" class="card-icon">
+                    <span class="card-text">Digital workflows</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 2: Form Selection -->
+    <div id="page2" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>In which <span class="solution-text">Form</span> are your files available?</h1>
+            </div>
+
+            <!-- Form Options Grid -->
+            <div class="solutions-grid" id="formOptions">
+                <!-- Options will be populated by JavaScript based on selected solution -->
+            </div>
+
+            <!-- Back Button -->
+            <div class="back-button-container">
+                <button class="back-button" onclick="goBack()">← Back to Solutions</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Slider Page: Generic slider for various contexts -->
+    <div id="slider-page" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1 id="slider-heading">How many <span class="solution-text">Documents</span> do you process per month?</h1>
+            </div>
+
+            <!-- Slider Container -->
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <input type="range" id="documentSlider" class="slider" min="0" max="9" value="4" step="1">
+                    <div class="slider-labels">
+                        <span class="slider-label">100</span>
+                        <span class="slider-label">500</span>
+                        <span class="slider-label">1.000</span>
+                        <span class="slider-label">2.500</span>
+                        <span class="slider-label active">5.000</span>
+                        <span class="slider-label">10.000</span>
+                        <span class="slider-label">25.000</span>
+                        <span class="slider-label">50.000</span>
+                        <span class="slider-label">100.000</span>
+                        <span class="slider-label">>100,000</span>
+                    </div>
+                </div>
+                
+                <!-- Selected Value Display -->
+                <div class="selected-value">
+                    <span id="selectedValue">5.000</span> documents per month
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackToForm()" id="slider-back-button">← Back</button>
+                <button class="continue-button" onclick="continueWithSlider()">Continue</button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Page 4: Scanning Options (for Classic scanning) -->
+    <div id="page4" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>What's wrong with you <span class="solution-text">important</span>?</h1>
+            </div>
+
+            <!-- Scanning Options Grid -->
+            <div class="solutions-grid" id="scanningOptions">
+                <!-- Options will be populated dynamically -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackToSlider()">← Back</button>
+                <button class="continue-button" onclick="proceedWithScanningOptions()">Continue</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 5: What Fits Selection (for Automation) -->
+    <div id="what-fits-page" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>Select <span class="solution-text">What fits</span> (several possible)</h1>
+            </div>
+
+            <!-- What Fits Options Grid -->
+            <div class="solutions-grid" id="whatFitsOptions">
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(0)" data-index="0">
+                    <img src="svgs/documents.svg" alt="Bills" class="card-icon">
+                    <span class="card-text">Bills</span>
+                </div>
+
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(1)" data-index="1">
+                    <img src="svgs/inbox.svg" alt="Goods Receipt Documents" class="card-icon">
+                    <span class="card-text">Goods Receipt Documents</span>
+                </div>
+
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(2)" data-index="2">
+                    <img src="svgs/workflows.svg" alt="Delivery" class="card-icon">
+                    <span class="card-text">Delivery</span>
+                </div>
+
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(3)" data-index="3">
+                    <img src="svgs/automation.svg" alt="Travel expense reports" class="card-icon">
+                    <span class="card-text">Travel expense reports</span>
+                </div>
+
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(4)" data-index="4">
+                    <img src="svgs/dms.svg" alt="Loan applications" class="card-icon">
+                    <span class="card-text">Loan applications</span>
+                </div>
+
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(5)" data-index="5">
+                    <img src="svgs/scan.svg" alt="Settlements of all kinds" class="card-icon">
+                    <span class="card-text">Settlements of all kinds</span>
+                </div>
+
+                <div class="solution-card multi-select" onclick="toggleWhatFitsSelection(6)" data-index="6">
+                    <img src="svgs/other.svg" alt="Other forms" class="card-icon">
+                    <span class="card-text">Other forms</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackFromWhatFits()">← Back</button>
+                <button class="continue-button" onclick="proceedWithWhatFits()" disabled>Continue</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 6: Process Optimization Areas (for Digital workflows) -->
+    <div id="process-optimization-page" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>For <span class="solution-text">which area</span> Are you looking for process optimization?</h1>
+            </div>
+
+            <!-- Process Optimization Options Grid -->
+            <div class="solutions-grid" id="processOptimizationOptions">
+                <div class="solution-card" onclick="selectProcessOptimization('Contract management')">
+                    <img src="svgs/documents.svg" alt="Contract management" class="card-icon">
+                    <span class="card-text">Contract management</span>
+                </div>
+
+                <div class="solution-card" onclick="selectProcessOptimization('Accountancy')">
+                    <img src="svgs/workflows.svg" alt="Accountancy" class="card-icon">
+                    <span class="card-text">Accountancy</span>
+                </div>
+
+                <div class="solution-card" onclick="selectProcessOptimization('Staff')">
+                    <img src="svgs/automation.svg" alt="Staff" class="card-icon">
+                    <span class="card-text">Staff</span>
+                </div>
+
+                <div class="solution-card" onclick="selectProcessOptimization('Other')">
+                    <img src="svgs/other.svg" alt="Other" class="card-icon">
+                    <span class="card-text">Other</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackToWorkflowsSlider()">← Back</button>
+                <button class="continue-button" onclick="proceedToDigitalWorkflowsContact()" disabled>Continue</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 7: Automation Data Return Options -->
+    <div id="automation-data-return-page" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>How should the <span class="solution-text">Data returned</span> become?</h1>
+            </div>
+
+            <!-- Automation Data Return Options Grid -->
+            <div class="solutions-grid" id="automationDataReturnOptions">
+                <div class="solution-card" onclick="selectAutomationDataReturn('Directly (into the target system)')">
+                    <img src="svgs/automation.svg" alt="Directly" class="card-icon">
+                    <span class="card-text">Directly (into the target system)</span>
+                </div>
+
+                <div class="solution-card" onclick="selectAutomationDataReturn('Indirect (CSV, XML formats)')">
+                    <img src="svgs/documents.svg" alt="Indirect" class="card-icon">
+                    <span class="card-text">Indirect (CSV, XML formats)</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackToAutomationSlider()">← Back</button>
+                <button class="continue-button" onclick="proceedToAutomationContact()" disabled>Continue</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page 7: Data Return Options (for Document Classification and Inbox) -->
+    <div id="data-return-page" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>How should the <span class="solution-text">Data returned</span> become?</h1>
+            </div>
+
+            <!-- Data Return Options Grid -->
+            <div class="solutions-grid" id="dataReturnOptions">
+                <div class="solution-card" onclick="selectDataReturn('Handover Share')">
+                    <img src="svgs/workflows.svg" alt="Handover Share" class="card-icon">
+                    <span class="card-text">Handover Share</span>
+                </div>
+
+                <div class="solution-card" onclick="selectDataReturn('Interface')">
+                    <img src="svgs/automation.svg" alt="Interface" class="card-icon">
+                    <span class="card-text">Interface</span>
+                </div>
+
+                <div class="solution-card" onclick="selectDataReturn('Software solution from documentus')">
+                    <img src="svgs/dms.svg" alt="Software solution" class="card-icon">
+                    <span class="card-text">Software solution from documentus</span>
+                </div>
+
+                <div class="solution-card" onclick="selectDataReturn('Differently')">
+                    <img src="svgs/other.svg" alt="Differently" class="card-icon">
+                    <span class="card-text">Differently</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackToSheetsSlider()">← Back</button>
+                <button class="continue-button" onclick="proceedToContactPage()" disabled>Continue</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Contact Page: Contact Form (for Document Classification and Classic scanning) -->
+    <div id="contact-page" class="page">
+        <main class="main-content">
+            <!-- Main Banner -->
+            <div class="main-banner">
+                <h1>How can we contact you?</h1>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="company" name="company" placeholder="Company (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Phone (optional)">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="slider-actions">
+                <button class="back-button" onclick="goBackFromContact()">← Back</button>
+                <button class="continue-button" onclick="submitContactForm()">Dispatch</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Define slider configurations for different contexts
+        const sliderConfigs = {
+            'Digital workflows': {
+                heading: 'How many <span class="solution-text">Documents</span> do you process per month?',
+                values: ['100', '500', '1000', '2500', '5000', '10000', '25000', '50000', '100000', '>100,000'],
+                defaultValue: 4,
+                unit: 'documents per month'
+            },
+            'Workflows': {
+                heading: 'By how many <span class="solution-text">Workflows</span> is it approx.?',
+                values: ['1', '2', '5', '10', '20', '50', '100', '200', '500', '>500'],
+                defaultValue: 4,
+                unit: 'workflows'
+            },
+            'Sheets per document': {
+                heading: 'Average <span class="solution-text">Number of sheets per document</span> ?',
+                values: ['1', '2', '5', '10', '20', '50', '100', '200', '500', '>500'],
+                defaultValue: 4,
+                unit: 'sheets per document'
+            },
+            'Post volume': {
+                heading: 'How much <span class="solution-text">post</span> do you get? (letters, digital receipts)',
+                values: ['100', '500', '1000', '2500', '5000', '10000', '25000', '50000', '100000', '>100,000'],
+                defaultValue: 4,
+                unit: 'items per month'
+            },
+            'Files': {
+                heading: 'At how many <span class="solution-text">files</span> is it approx. ?',
+                values: ['50', '100', '250', '500', '1.000', '2.500', '5.000', '7.500', '10.000', '>10,000'],
+                defaultValue: 4,
+                unit: 'files'
+            },
+            'Automation documents': {
+                heading: 'At <span class="solution-text">how many documents</span> What is it?',
+                values: ['100', '500', '1.000', '2.500', '5.000', '10.000', '25.000', '50.000', '100.000', '>100,000'],
+                defaultValue: 4,
+                unit: 'documents'
+            },
+            'Storage space': {
+                heading: 'How much <span class="solution-text">Storage space</span> Do you need?',
+                values: ['1 GB', '5 GB', '10 GB', '50 GB', '100 GB', '500 GB', '1 TB', '3 TB', '5 TB', '>5 TB'],
+                defaultValue: 4,
+                unit: 'storage'
+            },
+            'User count': {
+                heading: 'By how many <span class="solution-text">User</span> is it approx.?',
+                values: ['1', '2', '5', '10', '20', '50', '100', '200', '500', '>500'],
+                defaultValue: 4,
+                unit: 'users'
+            }
+        };
+
+        // Define form options for each solution
+        const solutionOptions = {
+            'Classic scanning': [
+                { name: 'Folder', icon: 'svgs/scan.svg', description: 'Traditional folder storage' },
+                { name: 'Hanging file', icon: 'svgs/documents.svg', description: 'Hanging file system' },
+                { name: 'Briefcases', icon: 'svgs/inbox.svg', description: 'Portable document cases' },
+                { name: 'Plans larger than A3', icon: 'svgs/automation.svg', description: 'Large format documents' },
+                { name: 'Other', icon: 'svgs/workflows.svg', description: 'Other storage methods' }
+            ],
+            'Document Classification': [
+                { name: 'Physical', icon: 'svgs/scan.svg', description: 'Physical documents' },
+                { name: 'Digital', icon: 'svgs/documents.svg', description: 'Digital files' },
+                { name: 'Both', icon: 'svgs/workflows.svg', description: 'Physical and digital' }
+            ],
+            'Inbox': [
+                { name: 'Physical', icon: 'svgs/scan.svg', description: 'Physical documents' },
+                { name: 'Digital', icon: 'svgs/documents.svg', description: 'Digital files' },
+                { name: 'Both', icon: 'svgs/workflows.svg', description: 'Physical and digital' }
+            ],
+            'Automation': [
+                { name: 'Physical', icon: 'svgs/scan.svg', description: 'Physical documents' },
+                { name: 'Digital', icon: 'svgs/documents.svg', description: 'Digital files' },
+                { name: 'Both', icon: 'svgs/workflows.svg', description: 'Physical and digital' }
+            ],
+            'Document Management System': [
+                { name: 'Physical', icon: 'svgs/scan.svg', description: 'Physical documents' },
+                { name: 'Digital', icon: 'svgs/documents.svg', description: 'Digital files' },
+                { name: 'Both', icon: 'svgs/workflows.svg', description: 'Physical and digital' }
+            ],
+            'Digital workflows': [
+                { name: 'Process Design', icon: 'svgs/workflows.svg', description: 'Workflow design' },
+                { name: 'Task Automation', icon: 'svgs/automation.svg', description: 'Task automation' },
+                { name: 'Approval Process', icon: 'svgs/documents.svg', description: 'Approval workflows' },
+                { name: 'Integration', icon: 'svgs/dms.svg', description: 'System integration' },
+                { name: 'Other', icon: 'svgs/inbox.svg', description: 'Other workflow features' }
+            ]
+        };
+
+        // Scanning options for Classic scanning 4th page
+        const scanningOptions = [
+            { name: 'Full-text recognition', icon: 'svgs/scan.svg', description: 'OCR text recognition' },
+            { name: 'Color', icon: 'svgs/documents.svg', description: 'Color scanning' },
+            { name: 'Black and white', icon: 'svgs/inbox.svg', description: 'Monochrome scanning' },
+            { name: 'Resolution', icon: 'svgs/automation.svg', description: 'Image resolution settings' },
+            { name: 'Blank page deletion', icon: 'svgs/workflows.svg', description: 'Remove blank pages' }
+        ];
+
+        // Clean tracking system - clears irrelevant data based on current path
+        function clearIrrelevantData(currentSolution) {
+            // Always clear previous solution-specific data when changing solutions
+            const allKeys = [
+                'selectedForm', 'selectedWhatFits', 'selectedDataReturn', 
+                'selectedAutomationDataReturn', 'selectedProcessOptimization',
+                'documentsPerMonth', 'sheetsPerDocument', 'sheetsPerDocumentInbox',
+                'postVolume', 'digitalWorkflowsUsers', 'digitalWorkflowsCount',
+                'automationDocumentCount', 'dmsStorageSpace', 'selectedSliderValue',
+                'selectedScanningOptions', 'digitalWorkflowsDocuments'
+            ];
+            
+            // Clear all solution-specific data
+            allKeys.forEach(key => localStorage.removeItem(key));
+            
+            console.log('🧹 CLEANUP: Cleared all previous solution data for:', currentSolution);
+        }
+
+        // Get current valid selections based on current solution path
+        function getCurrentValidSelections() {
+            const currentSolution = localStorage.getItem('selectedSolution');
+            const validSelections = {
+                solution: currentSolution,
+                form: null,
+                sliders: {},
+                finalChoice: null,
+                contactInfo: {}
+            };
+
+            if (!currentSolution) return validSelections;
+
+            // Get form selection (if applicable)
+            if (['Classic scanning', 'Document Classification', 'Inbox', 'Document Management System'].includes(currentSolution)) {
+                validSelections.form = localStorage.getItem('selectedForm');
+            }
+
+            // Get solution-specific data
+            switch (currentSolution) {
+                case 'Classic scanning':
+                    validSelections.sliders.files = localStorage.getItem('selectedSliderValue');
+                    validSelections.finalChoice = JSON.parse(localStorage.getItem('selectedScanningOptions') || 'null');
+                    break;
+                    
+                case 'Document Classification':
+                    validSelections.sliders.documents = localStorage.getItem('documentsPerMonth');
+                    validSelections.sliders.sheets = localStorage.getItem('sheetsPerDocument');
+                    validSelections.finalChoice = localStorage.getItem('selectedDataReturn');
+                    break;
+                    
+                case 'Inbox':
+                    validSelections.sliders.postVolume = localStorage.getItem('postVolume');
+                    validSelections.sliders.sheets = localStorage.getItem('sheetsPerDocumentInbox');
+                    validSelections.finalChoice = localStorage.getItem('selectedDataReturn');
+                    break;
+                    
+                case 'Automation':
+                    validSelections.finalChoice = {
+                        whatFits: JSON.parse(localStorage.getItem('selectedWhatFits') || 'null'),
+                        documentCount: localStorage.getItem('automationDocumentCount'),
+                        dataReturn: localStorage.getItem('selectedAutomationDataReturn')
+                    };
+                    break;
+                    
+                case 'Document Management System':
+                    validSelections.sliders.storage = localStorage.getItem('dmsStorageSpace');
+                    break;
+                    
+                case 'Digital workflows':
+                    validSelections.sliders.users = localStorage.getItem('digitalWorkflowsUsers');
+                    validSelections.sliders.workflows = localStorage.getItem('digitalWorkflowsCount');
+                    validSelections.finalChoice = localStorage.getItem('selectedProcessOptimization');
+                    break;
+            }
+
+            return validSelections;
+        }
+
+        // Function to print current VALID user selections
+        function printCurrentSelections(step) {
+            const validSelections = getCurrentValidSelections();
+            
+            console.log(`\n=== VALID USER SELECTIONS - ${step} ===`);
+            console.log('✅ Current Solution:', validSelections.solution || 'None');
+            
+            if (validSelections.form) {
+                console.log('✅ Selected Form:', validSelections.form);
+            }
+            
+            if (Object.keys(validSelections.sliders).length > 0) {
+                console.log('✅ Slider Values:', validSelections.sliders);
+            }
+            
+            if (validSelections.finalChoice) {
+                console.log('✅ Final Choice:', validSelections.finalChoice);
+            }
+            
+            console.log('===============================\n');
+        }
+
+        function selectSolution(solution) {
+            console.log('🎯 STEP 1: Selected solution:', solution);
+            
+            // Clear all previous data when selecting a new solution
+            clearIrrelevantData(solution);
+            
+            // Store the selected solution
+            localStorage.setItem('selectedSolution', solution);
+            
+            printCurrentSelections('SOLUTION SELECTION');
+            
+            // Check if it's Digital workflows - go directly to user count slider
+            if (solution === 'Digital workflows') {
+                showSlider('User count');
+            } else {
+                // For other solutions, go to form selection page
+                populateFormOptions(solution);
+                document.getElementById('page1').classList.remove('active');
+                document.getElementById('page2').classList.add('active');
+            }
+        }
+
+        function showSlider(sliderType) {
+            const config = sliderConfigs[sliderType];
+            if (config) {
+                // Set the heading
+                document.getElementById('slider-heading').innerHTML = config.heading;
+                
+                // Update slider values
+                const slider = document.getElementById('documentSlider');
+                slider.value = config.defaultValue;
+                
+                // Update labels
+                const labels = document.querySelectorAll('.slider-label');
+                labels.forEach((label, index) => {
+                    label.textContent = config.values[index] || '';
+                    label.classList.toggle('active', index === config.defaultValue);
+                });
+                
+                // Update selected value display
+                document.getElementById('selectedValue').textContent = config.values[config.defaultValue];
+                
+                // Store slider type for later use
+                localStorage.setItem('currentSliderType', sliderType);
+                
+                // Navigate to slider page - hide all other pages
+                document.getElementById('page1').classList.remove('active');
+                document.getElementById('page2').classList.remove('active');
+                document.getElementById('slider-page').classList.add('active');
+                
+                // Update back button text based on context
+                setTimeout(() => {
+                    const backButton = document.getElementById('slider-back-button');
+                    const selectedSolution = localStorage.getItem('selectedSolution');
+                    if (backButton) {
+                        if (selectedSolution === 'Classic scanning') {
+                            backButton.textContent = '← Back to Form Selection';
+                        } else {
+                            backButton.textContent = '← Back to Solutions';
+                        }
+                    }
+                }, 10);
+            }
+        }
+
+        function populateFormOptions(solution) {
+            const formOptionsContainer = document.getElementById('formOptions');
+            const options = solutionOptions[solution] || solutionOptions['Classic scanning'];
+            
+            // Check if this is Classic scanning for multi-selection
+            const isMultiSelect = solution === 'Classic scanning';
+            
+            // Clean up any existing button containers in the form options page only
+            const formPage = document.getElementById('page2');
+            const existingButtonContainers = formPage.querySelectorAll('.slider-actions');
+            existingButtonContainers.forEach(container => container.remove());
+            
+            // Hide/show the original back button based on multi-selection
+            const originalBackButton = document.querySelector('.back-button-container');
+            if (originalBackButton) {
+                originalBackButton.style.display = isMultiSelect ? 'none' : 'block';
+            }
+            
+            formOptionsContainer.innerHTML = options.map((option, index) => `
+                <div class="solution-card ${isMultiSelect ? 'multi-select' : ''}" onclick="${isMultiSelect ? `toggleSelection(${index})` : `selectForm('${option.name}')`}" data-index="${index}">
+                    <img src="${option.icon}" alt="${option.name}" class="card-icon">
+                    <span class="card-text">${option.name}</span>
+                </div>
+            `).join('');
+            
+            // Add Continue button for multi-selection
+            if (isMultiSelect) {
+                const continueButtonContainer = document.createElement('div');
+                continueButtonContainer.className = 'slider-actions';
+                continueButtonContainer.innerHTML = `
+                    <button class="back-button" onclick="goBack()">← Back to Solutions</button>
+                    <button class="continue-button" onclick="proceedWithMultiSelection()" disabled>Continue</button>
+                `;
+                formOptionsContainer.parentNode.appendChild(continueButtonContainer);
+            }
+        }
+
+        function selectForm(form) {
+            console.log('📋 STEP 2: Selected form:', form);
+            
+            // Clear form-specific data when changing form selection
+            const formSpecificKeys = [
+                'selectedWhatFits', 'selectedDataReturn', 'selectedAutomationDataReturn',
+                'selectedProcessOptimization', 'documentsPerMonth', 'sheetsPerDocument',
+                'sheetsPerDocumentInbox', 'postVolume', 'digitalWorkflowsUsers',
+                'digitalWorkflowsCount', 'automationDocumentCount', 'dmsStorageSpace',
+                'selectedSliderValue', 'selectedScanningOptions'
+            ];
+            formSpecificKeys.forEach(key => localStorage.removeItem(key));
+            console.log('🧹 CLEANUP: Cleared form-specific data when changing form selection');
+            
+            // Store the selected form
+            localStorage.setItem('selectedForm', form);
+            
+            printCurrentSelections('FORM SELECTION');
+            
+            // Check if it's Classic scanning - go to Files slider
+            const selectedSolution = localStorage.getItem('selectedSolution');
+            if (selectedSolution === 'Classic scanning') {
+                showSlider('Files');
+            } else if (selectedSolution === 'Document Classification') {
+                // Go to documents per month slider for Document Classification
+                showSlider('Digital workflows');
+            } else if (selectedSolution === 'Inbox') {
+                // Go to post volume slider for Inbox
+                showSlider('Post volume');
+            } else if (selectedSolution === 'Automation') {
+                // Go to what fits page for Automation
+                document.getElementById('page2').classList.remove('active');
+                document.getElementById('what-fits-page').classList.add('active');
+            } else if (selectedSolution === 'Document Management System') {
+                // Go to storage space slider for DMS
+                showSlider('Storage space');
+            } else {
+                // Show completion for other solutions
+                alert(`Selected: ${selectedSolution} - ${form}`);
+            }
+        }
+
+        // Multi-selection functions
+        function toggleSelection(index) {
+            const card = document.querySelector(`[data-index="${index}"]`);
+            const isSelected = card.classList.contains('selected');
+            
+            // Toggle selected class for visual feedback
+            if (isSelected) {
+                card.classList.remove('selected');
+            } else {
+                card.classList.add('selected');
+            }
+            
+            updateSelection();
+        }
+
+        function updateSelection() {
+            const selectedCards = document.querySelectorAll('.solution-card.multi-select.selected');
+            const continueButton = document.querySelector('.continue-button');
+            const selectedCount = selectedCards.length;
+            
+            // Enable/disable Continue button based on selection
+            if (continueButton) {
+                continueButton.disabled = selectedCount === 0;
+            }
+        }
+
+        function proceedWithMultiSelection() {
+            const selectedCards = document.querySelectorAll('.solution-card.multi-select.selected');
+            const selectedOptions = [];
+            
+            selectedCards.forEach(card => {
+                const index = parseInt(card.getAttribute('data-index'));
+                const options = solutionOptions['Classic scanning'];
+                selectedOptions.push(options[index].name);
+            });
+            
+            if (selectedOptions.length > 0) {
+                // Store selected options
+                localStorage.setItem('selectedForm', selectedOptions.join(', '));
+                
+                // Go to Files slider page for Classic scanning
+                showSlider('Files');
+            }
+        }
+
+
+        function goBack() {
+            // Clear form-specific data when going back to solution selection
+            const formSpecificKeys = [
+                'selectedForm', 'selectedWhatFits', 'selectedDataReturn', 
+                'selectedAutomationDataReturn', 'selectedProcessOptimization',
+                'documentsPerMonth', 'sheetsPerDocument', 'sheetsPerDocumentInbox',
+                'postVolume', 'digitalWorkflowsUsers', 'digitalWorkflowsCount',
+                'automationDocumentCount', 'dmsStorageSpace', 'selectedSliderValue',
+                'selectedScanningOptions'
+            ];
+            formSpecificKeys.forEach(key => localStorage.removeItem(key));
+            console.log('🧹 CLEANUP: Cleared form data when going back to solutions');
+            
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page1').classList.add('active');
+            
+            printCurrentSelections('BACK TO SOLUTIONS');
+        }
+
+        function goBackToForm() {
+            document.getElementById('slider-page').classList.remove('active');
+            
+            // Check which solution we came from
+            const selectedSolution = localStorage.getItem('selectedSolution');
+            const sliderType = localStorage.getItem('currentSliderType');
+            
+            if (selectedSolution === 'Classic scanning') {
+                // Classic scanning: Files slider -> Form selection page
+                document.getElementById('page2').classList.add('active');
+            } else if (selectedSolution === 'Document Classification') {
+                // Document Classification has 2 sliders: Documents -> Sheets
+                if (sliderType === 'Digital workflows') {
+                    // From documents slider, go back to form selection page
+                    document.getElementById('page2').classList.add('active');
+                } else if (sliderType === 'Sheets per document') {
+                    // From sheets slider, go back to documents slider
+                    showSlider('Digital workflows');
+                }
+            } else if (selectedSolution === 'Inbox') {
+                // Inbox has 2 sliders: Post volume -> Sheets
+                if (sliderType === 'Post volume') {
+                    // From post volume slider, go back to form selection page
+                    document.getElementById('page2').classList.add('active');
+                } else if (sliderType === 'Sheets per document') {
+                    // From sheets slider, go back to post volume slider
+                    showSlider('Post volume');
+                }
+            } else if (selectedSolution === 'Document Management System') {
+                // DMS: Storage slider -> Form selection page
+                document.getElementById('page2').classList.add('active');
+            } else if (selectedSolution === 'Automation') {
+                // Go back to what fits page for Automation
+                document.getElementById('what-fits-page').classList.add('active');
+            } else if (selectedSolution === 'Digital workflows') {
+                // Check which slider we're on for Digital workflows
+                if (sliderType === 'User count') {
+                    // From user count slider, go back to solution selection
+                    document.getElementById('page1').classList.add('active');
+                } else if (sliderType === 'Workflows') {
+                    // From workflows slider, go back to user count slider
+                    showSlider('User count');
+                }
+            } else {
+                // For other solutions, go back to solution selection
+                document.getElementById('page1').classList.add('active');
+            }
+        }
+
+        function goBackToSlider() {
+            document.getElementById('page4').classList.remove('active');
+            document.getElementById('slider-page').classList.add('active');
+        }
+
+        function continueWithSlider() {
+            const selectedValue = document.getElementById('selectedValue').textContent;
+            const selectedSolution = localStorage.getItem('selectedSolution');
+            const selectedForm = localStorage.getItem('selectedForm');
+            const sliderType = localStorage.getItem('currentSliderType');
+            const config = sliderConfigs[sliderType];
+            
+            console.log(`📊 SLIDER: ${sliderType} - Selected value: ${selectedValue}`);
+            
+            // Store the slider value
+            localStorage.setItem('selectedSliderValue', selectedValue);
+            
+            // Check if it's Classic scanning - go to page 4 (scanning options)
+            if (selectedSolution === 'Classic scanning') {
+                populateScanningOptions();
+                document.getElementById('slider-page').classList.remove('active');
+                document.getElementById('page4').classList.add('active');
+            } else if (selectedSolution === 'Document Classification') {
+                // Check which slider we're currently on for Document Classification
+                if (sliderType === 'Digital workflows') {
+                    // Store the documents per month value and go to sheets per document slider
+                    localStorage.setItem('documentsPerMonth', selectedValue);
+                    showSlider('Sheets per document');
+                } else if (sliderType === 'Sheets per document') {
+                    // Second slider completed, go to data return page
+                    localStorage.setItem('sheetsPerDocument', selectedValue);
+                    document.getElementById('slider-page').classList.remove('active');
+                    document.getElementById('data-return-page').classList.add('active');
+                }
+            } else if (selectedSolution === 'Inbox') {
+                // Check which slider we're currently on for Inbox
+                if (sliderType === 'Post volume') {
+                    // First slider completed, go to sheets per document slider
+                    localStorage.setItem('postVolume', selectedValue);
+                    showSlider('Sheets per document');
+                } else if (sliderType === 'Sheets per document') {
+                    // Second slider completed, go to data return page
+                    localStorage.setItem('sheetsPerDocumentInbox', selectedValue);
+                    document.getElementById('slider-page').classList.remove('active');
+                    document.getElementById('data-return-page').classList.add('active');
+                }
+            } else if (selectedSolution === 'Automation') {
+                // Go to automation data return page
+                localStorage.setItem('automationDocumentCount', selectedValue);
+                document.getElementById('slider-page').classList.remove('active');
+                document.getElementById('automation-data-return-page').classList.add('active');
+            } else if (selectedSolution === 'Document Management System') {
+                // Go directly to contact page for DMS
+                localStorage.setItem('dmsStorageSpace', selectedValue);
+                document.getElementById('slider-page').classList.remove('active');
+                document.getElementById('contact-page').classList.add('active');
+            } else if (selectedSolution === 'Digital workflows') {
+                // Check which slider we're currently on for Digital workflows
+                if (sliderType === 'User count') {
+                    // First slider completed, go to workflows slider
+                    localStorage.setItem('digitalWorkflowsUsers', selectedValue);
+                    showSlider('Workflows');
+                } else if (sliderType === 'Workflows') {
+                    // Second slider completed, go to process optimization page
+                    localStorage.setItem('digitalWorkflowsCount', selectedValue);
+                    document.getElementById('slider-page').classList.remove('active');
+                    document.getElementById('process-optimization-page').classList.add('active');
+                }
+            } else {
+                // Show completion for other solutions
+                if (selectedForm) {
+                    alert(`Selected: ${selectedSolution} - ${selectedForm} - ${selectedValue} ${config ? config.unit : 'items'}`);
+                } else {
+                    alert(`Selected: ${selectedSolution} - ${selectedValue} ${config ? config.unit : 'items'}`);
+                }
+            }
+        }
+
+        // Scanning options functions
+        function populateScanningOptions() {
+            const scanningOptionsContainer = document.getElementById('scanningOptions');
+            
+            scanningOptionsContainer.innerHTML = scanningOptions.map((option, index) => `
+                <div class="solution-card multi-select" onclick="toggleScanningSelection(${index})" data-index="${index}">
+                    <img src="${option.icon}" alt="${option.name}" class="card-icon">
+                    <span class="card-text">${option.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function toggleScanningSelection(index) {
+            const card = document.querySelector(`#scanningOptions .solution-card[data-index="${index}"]`);
+            if (card) {
+                card.classList.toggle('selected');
+                updateScanningSelection();
+            }
+        }
+
+        function updateScanningSelection() {
+            const selectedCards = document.querySelectorAll('#scanningOptions .solution-card.selected');
+            const continueButton = document.querySelector('#page4 .continue-button');
+            
+            if (continueButton) {
+                continueButton.disabled = selectedCards.length === 0;
+            }
+        }
+
+        function selectScanningOption(option) {
+            console.log('Selected scanning option:', option);
+            // Store the selected scanning option
+            localStorage.setItem('selectedScanningOption', option);
+        }
+
+        function goBackToSlider() {
+            document.getElementById('page4').classList.remove('active');
+            document.getElementById('slider-page').classList.add('active');
+        }
+
+        function goBackToScanningOptions() {
+            document.getElementById('contact-page').classList.remove('active');
+            document.getElementById('page4').classList.add('active');
+        }
+
+        function goBackFromContact() {
+            const selectedSolution = localStorage.getItem('selectedSolution');
+            document.getElementById('contact-page').classList.remove('active');
+            
+            if (selectedSolution === 'Document Classification' || selectedSolution === 'Inbox') {
+                // Go back to data return page for Document Classification and Inbox
+                document.getElementById('data-return-page').classList.add('active');
+            } else if (selectedSolution === 'Automation') {
+                // Go back to automation data return page for Automation
+                document.getElementById('automation-data-return-page').classList.add('active');
+            } else if (selectedSolution === 'Document Management System') {
+                // Go back to storage space slider for DMS
+                document.getElementById('slider-page').classList.add('active');
+            } else if (selectedSolution === 'Digital workflows') {
+                // Go back to process optimization page for Digital workflows
+                document.getElementById('process-optimization-page').classList.add('active');
+            } else {
+                // Go back to scanning options for Classic scanning
+                document.getElementById('page4').classList.add('active');
+            }
+        }
+
+        function goBackToSheetsSlider() {
+            document.getElementById('data-return-page').classList.remove('active');
+            document.getElementById('slider-page').classList.add('active');
+        }
+
+        function selectDataReturn(option) {
+            console.log('🎯 DATA RETURN: Selected option:', option);
+            localStorage.setItem('selectedDataReturn', option);
+            
+            // Remove selection from all cards
+            document.querySelectorAll('#dataReturnOptions .solution-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.target.closest('.solution-card').classList.add('selected');
+            
+            // Enable continue button
+            const continueButton = document.querySelector('#data-return-page .continue-button');
+            if (continueButton) {
+                continueButton.disabled = false;
+            }
+            
+            printCurrentSelections('DATA RETURN SELECTION');
+            
+            // Automatically proceed to contact page
+            setTimeout(() => {
+                document.getElementById('data-return-page').classList.remove('active');
+                document.getElementById('contact-page').classList.add('active');
+            }, 300); // Small delay for visual feedback
+        }
+
+        function proceedToContactPage() {
+            const selectedDataReturn = localStorage.getItem('selectedDataReturn');
+            if (!selectedDataReturn) {
+                alert('Please select a data return option first.');
+                return;
+            }
+            
+            document.getElementById('data-return-page').classList.remove('active');
+            document.getElementById('contact-page').classList.add('active');
+        }
+
+        // Automation Data Return functions
+        function selectAutomationDataReturn(option) {
+            console.log('🎯 AUTOMATION DATA RETURN: Selected option:', option);
+            localStorage.setItem('selectedAutomationDataReturn', option);
+            
+            // Remove selection from all cards
+            document.querySelectorAll('#automationDataReturnOptions .solution-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.target.closest('.solution-card').classList.add('selected');
+            
+            // Enable continue button
+            const continueButton = document.querySelector('#automation-data-return-page .continue-button');
+            if (continueButton) {
+                continueButton.disabled = false;
+            }
+            
+            printCurrentSelections('AUTOMATION DATA RETURN SELECTION');
+            
+            // Automatically proceed to contact page
+            setTimeout(() => {
+                document.getElementById('automation-data-return-page').classList.remove('active');
+                document.getElementById('contact-page').classList.add('active');
+            }, 300); // Small delay for visual feedback
+        }
+
+        function goBackToAutomationSlider() {
+            document.getElementById('automation-data-return-page').classList.remove('active');
+            document.getElementById('slider-page').classList.add('active');
+        }
+
+        function proceedToAutomationContact() {
+            const selectedAutomationDataReturn = localStorage.getItem('selectedAutomationDataReturn');
+            if (!selectedAutomationDataReturn) {
+                alert('Please select a data return option first.');
+                return;
+            }
+            
+            document.getElementById('automation-data-return-page').classList.remove('active');
+            document.getElementById('contact-page').classList.add('active');
+        }
+
+        // Process Optimization functions
+        function selectProcessOptimization(option) {
+            console.log('🎯 PROCESS OPTIMIZATION: Selected area:', option);
+            localStorage.setItem('selectedProcessOptimization', option);
+            
+            // Remove selection from all cards
+            document.querySelectorAll('#processOptimizationOptions .solution-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            event.target.closest('.solution-card').classList.add('selected');
+            
+            // Enable continue button
+            const continueButton = document.querySelector('#process-optimization-page .continue-button');
+            if (continueButton) {
+                continueButton.disabled = false;
+            }
+            
+            printCurrentSelections('PROCESS OPTIMIZATION SELECTION');
+            
+            // Automatically proceed to contact page
+            setTimeout(() => {
+                document.getElementById('process-optimization-page').classList.remove('active');
+                document.getElementById('contact-page').classList.add('active');
+            }, 300); // Small delay for visual feedback
+        }
+
+        function goBackToWorkflowsSlider() {
+            document.getElementById('process-optimization-page').classList.remove('active');
+            document.getElementById('slider-page').classList.add('active');
+        }
+
+        function proceedToDigitalWorkflowsContact() {
+            const selectedProcessOptimization = localStorage.getItem('selectedProcessOptimization');
+            if (!selectedProcessOptimization) {
+                alert('Please select a process optimization area first.');
+                return;
+            }
+            
+            document.getElementById('process-optimization-page').classList.remove('active');
+            document.getElementById('contact-page').classList.add('active');
+        }
+
+        // What Fits selection functions
+        function toggleWhatFitsSelection(index) {
+            const card = document.querySelector(`#whatFitsOptions .solution-card[data-index="${index}"]`);
+            if (card) {
+                card.classList.toggle('selected');
+                updateWhatFitsSelection();
+            }
+        }
+
+        function updateWhatFitsSelection() {
+            const selectedCards = document.querySelectorAll('#whatFitsOptions .solution-card.selected');
+            const continueButton = document.querySelector('#what-fits-page .continue-button');
+            
+            if (continueButton) {
+                continueButton.disabled = selectedCards.length === 0;
+            }
+        }
+
+        function goBackFromWhatFits() {
+            document.getElementById('what-fits-page').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+        }
+
+        function proceedWithWhatFits() {
+            const selectedCards = document.querySelectorAll('#whatFitsOptions .solution-card.selected');
+            const selectedOptions = [];
+            
+            const whatFitsOptions = [
+                'Bills', 'Goods Receipt Documents', 'Delivery', 
+                'Travel expense reports', 'Loan applications', 
+                'Settlements of all kinds', 'Other forms'
+            ];
+            
+            selectedCards.forEach(card => {
+                const index = parseInt(card.getAttribute('data-index'));
+                selectedOptions.push(whatFitsOptions[index]);
+            });
+            
+            if (selectedOptions.length > 0) {
+                console.log('✅ WHAT FITS: Selected options:', selectedOptions);
+                // Store selected options
+                localStorage.setItem('selectedWhatFits', JSON.stringify(selectedOptions));
+                
+                printCurrentSelections('WHAT FITS SELECTION');
+                
+                // Go to documents slider for Automation
+                document.getElementById('what-fits-page').classList.remove('active');
+                showSlider('Automation documents');
+            } else {
+                alert('Please select at least one option first.');
+            }
+        }
+
+        function proceedWithScanningOptions() {
+            const selectedSolution = localStorage.getItem('selectedSolution');
+            const selectedSliderValue = localStorage.getItem('selectedSliderValue');
+            
+            // Collect all selected scanning options
+            const selectedCards = document.querySelectorAll('#scanningOptions .solution-card.selected');
+            const selectedScanningOptions = Array.from(selectedCards).map(card => {
+                const index = parseInt(card.getAttribute('data-index'));
+                return scanningOptions[index].name;
+            });
+            
+            if (selectedScanningOptions.length > 0) {
+                // Store selected scanning options
+                localStorage.setItem('selectedScanningOptions', JSON.stringify(selectedScanningOptions));
+                
+                // Navigate to contact page
+                document.getElementById('page4').classList.remove('active');
+                document.getElementById('contact-page').classList.add('active');
+            } else {
+                alert(`Please select at least one scanning option first.`);
+            }
+        }
+
+        // Utility function to add new slider types
+        function addSliderType(type, config) {
+            sliderConfigs[type] = config;
+        }
+
+        function submitContactForm() {
+            // Get contact form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const company = document.getElementById('company').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Get final valid selections
+            const finalSelections = getCurrentValidSelections();
+            
+            console.log('\n🎉 ===== FINAL FORM SUBMISSION ===== 🎉');
+            console.log('📝 CONTACT INFORMATION:');
+            console.log('   Name:', name || 'Not provided');
+            console.log('   Email:', email || 'Not provided');
+            console.log('   Company:', company || 'Not provided');
+            console.log('   Phone:', phone || 'Not provided');
+            console.log('\n✅ COMPLETE USER JOURNEY:');
+            console.log('   Solution:', finalSelections.solution);
+            if (finalSelections.form) {
+                console.log('   Form Type:', finalSelections.form);
+            }
+            if (Object.keys(finalSelections.sliders).length > 0) {
+                console.log('   Slider Values:', finalSelections.sliders);
+            }
+            if (finalSelections.finalChoice) {
+                console.log('   Final Choice:', finalSelections.finalChoice);
+            }
+            console.log('=====================================\n');
+            
+            // Placeholder for contact form submission
+            alert('Thank you for your submission! Check console for complete data.');
+        }
+
+        // Slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.getElementById('documentSlider');
+            const selectedValue = document.getElementById('selectedValue');
+            const labels = document.querySelectorAll('.slider-label');
+            
+            slider.addEventListener('input', function() {
+                const index = parseInt(this.value);
+                const sliderType = localStorage.getItem('currentSliderType');
+                const config = sliderConfigs[sliderType];
+                
+                if (config && config.values[index]) {
+                    selectedValue.textContent = config.values[index];
+                    
+                    // Update active label
+                    labels.forEach((label, i) => {
+                        label.classList.toggle('active', i === index);
+                    });
+                }
+            });
+            
+        });
+    </script>
+</body>
+</html>
